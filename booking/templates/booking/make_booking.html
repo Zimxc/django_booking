@@ -3,42 +3,46 @@
 {% block title %}Make Booking{% endblock %}
 
 {% block content %}
-    <h1>Make a booking</h1>
+    <div class="row">
+        <div class="col-lg-6">
+            <h1 class="mb-4">Make a booking</h1>
 
-    <form method="POST">
-        {% csrf_token %}
+            <form method="post" class="card card-body shadow-sm">
+                {% csrf_token %}
 
-        <div>
-            <label>Username:</label>
-            <input type="text" value="{{ request.user.username }}" readonly>
+                <div class="mb-3">
+                    <label class="form-label" for="username">Username</label>
+                    <input class="form-control" id="username" type="text" value="{{ request.user.username }}" readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="email">Email</label>
+                    <input class="form-control" id="email" type="email" value="{{ request.user.email }}" readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="room_number">Room</label>
+                    <select class="form-select" id="room_number" name="room_number" required>
+                        {% for room in rooms %}
+                            <option value="{{ room.room_number }}" {% if room.room_number == selected_room %}selected{% endif %}>
+                                {{ room }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="datetime_start">Start</label>
+                    <input class="form-control" type="datetime-local" id="datetime_start" name="datetime_start" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="datetime_end">End</label>
+                    <input class="form-control" type="datetime-local" id="datetime_end" name="datetime_end" required>
+                </div>
+
+                <button class="btn btn-primary" type="submit">Book room</button>
+            </form>
         </div>
-
-        <div>
-            <label>Email:</label>
-            <input type="email" value="{{ request.user.email }}" readonly>
-        </div>
-
-        <div>
-            <label for="room_number">Room:</label>
-            <select id="room_number" name="room_number" required>
-                {% for room in rooms %}
-                    <option value="{{ room.room_number }}" {% if room.room_number == selected_room %}selected{% endif %}>
-                        {{ room }}
-                    </option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <div>
-            <label for="datetime_start">Start:</label>
-            <input type="datetime-local" id="datetime_start" name="datetime_start" required>
-        </div>
-
-        <div>
-            <label for="datetime_end">End:</label>
-            <input type="datetime-local" id="datetime_end" name="datetime_end" required>
-        </div>
-
-        <button type="submit">Book room</button>
-    </form>
+    </div>
 {% endblock %}

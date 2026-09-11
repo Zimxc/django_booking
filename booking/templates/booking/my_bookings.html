@@ -3,18 +3,23 @@
 {% block title %}My bookings{% endblock %}
 
 {% block content %}
-    <h1>My bookings</h1>
+    <h1 class="mb-4">My bookings</h1>
 
     {% if bookings %}
-        <ul>
+        <div class="list-group">
             {% for booking in bookings %}
-                <li>
-                    {{ booking.room }}: {{ booking.datetime_start }} - {{ booking.datetime_end }}
-                    ({{ booking.get_status_display }})
-                </li>
+                <div class="list-group-item d-flex justify-content-between align-items-center gap-3">
+                    <div>
+                        <h2 class="h5 mb-1">{{ booking.room }}</h2>
+                        <span class="text-secondary">{{ booking.datetime_start }} — {{ booking.datetime_end }}</span>
+                    </div>
+                    <span class="badge text-bg-secondary">{{ booking.get_status_display }}</span>
+                </div>
             {% endfor %}
-        </ul>
+        </div>
     {% else %}
-        <p>You have no bookings yet. <a href="{% url 'make_booking' %}">Make one</a></p>
+        <div class="alert alert-secondary">
+            You have no bookings yet. <a class="alert-link" href="{% url 'make_booking' %}">Make one</a>
+        </div>
     {% endif %}
 {% endblock %}

@@ -3,11 +3,15 @@
 {% block title %}Booking created{% endblock %}
 
 {% block content %}
-    <h1>Booking created!</h1>
-    <p>Room: {{ booking.room }}</p>
-    <p>From: {{ booking.datetime_start }}</p>
-    <p>To: {{ booking.datetime_end }}</p>
-    <p>Status: {{ booking.get_status_display }}</p>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="h3 card-title">Booking created!</h1>
+            <p class="card-text mb-1"><strong>Room:</strong> {{ booking.room }}</p>
+            <p class="card-text mb-1"><strong>From:</strong> {{ booking.datetime_start }}</p>
+            <p class="card-text mb-1"><strong>To:</strong> {{ booking.datetime_end }}</p>
+            <p class="card-text"><strong>Status:</strong> {{ booking.get_status_display }}</p>
 
-    <a href="{% url 'my_bookings' %}">See my bookings</a>
+            <a class="btn btn-primary" href="{% url 'my_bookings' %}">See my bookings</a>
+        </div>
+    </div>
 {% endblock %}

@@ -3,8 +3,10 @@
 {% block title %}Booking error{% endblock %}
 
 {% block content %}
-    <h1>Could not create booking</h1>
-    <p>{{ error }}</p>
+    <div class="alert alert-danger">
+        <h1 class="h4 alert-heading">Could not create booking</h1>
+        <p class="mb-0">{{ error }}</p>
+    </div>
 
-    <a href="{% url 'make_booking' %}">Try again</a>
+    <a class="btn btn-outline-primary" href="{% url 'make_booking' %}">Try again</a>
 {% endblock %}
