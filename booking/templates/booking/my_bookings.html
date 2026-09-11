@@ -13,7 +13,14 @@
                         <h2 class="h5 mb-1">{{ booking.room }}</h2>
                         <span class="text-secondary">{{ booking.datetime_start }} — {{ booking.datetime_end }}</span>
                     </div>
-                    <span class="badge text-bg-secondary">{{ booking.get_status_display }}</span>
+                    <span class="badge
+                        {% if booking.status == 'confirmed' %}text-bg-success
+                        {% elif booking.status == 'cancelled' %}text-bg-danger
+                        {% else %}text-bg-warning
+                        {% endif %}
+                        ">
+                        {{ booking.get_status_display }}
+                    </span>
                 </div>
             {% endfor %}
         </div>

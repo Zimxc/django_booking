@@ -10,9 +10,9 @@
             {% for room in rooms %}
                 <div class="list-group-item d-flex justify-content-between align-items-center gap-3">
                     <div>
-                        <h2 class="h5 mb-1">Room {{ room.room_number }}</h2>
+                        <h2 class="h5 mb-1"> {{ room.room_type }}</h2>
                         <p class="mb-0 text-secondary">
-                            {{ room.room_type }} · {{ room.capacity }} people · {{ room.price_per_hour }} per hour
+                            room {{ room.room_number }} · {{ room.capacity }} people · {{ room.price_per_hour }} per hour
                         </p>
                     </div>
                     <a class="btn btn-primary" href="{% url 'make_booking' %}?room={{ room.room_number }}">Book</a>
