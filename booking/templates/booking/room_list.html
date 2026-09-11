@@ -1,0 +1,32 @@
+{% extends 'booking/base.html' %}
+
+{% block title %}Rooms{% endblock %}
+
+{% block content %}
+    <h1>Rooms</h1>
+
+    {% if rooms %}
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>Number</th>
+                <th>Type</th>
+                <th>Capacity</th>
+                <th>Price / hour</th>
+                <th>Features</th>
+                <th></th>
+            </tr>
+            {% for room in rooms %}
+                <tr>
+                    <td>{{ room.room_number }}</td>
+                    <td>{{ room.room_type }}</td>
+                    <td>{{ room.capacity }}</td>
+                    <td>{{ room.price_per_hour }}</td>
+                    <td>{{ room.special_features|default:"-" }}</td>
+                    <td><a href="{% url 'make_booking' %}?room={{ room.room_number|urlencode }}">Book</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No rooms available yet.</p>
+    {% endif %}
+{% endblock %}

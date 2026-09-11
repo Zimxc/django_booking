@@ -1,0 +1,20 @@
+{% extends 'booking/base.html' %}
+
+{% block title %}My bookings{% endblock %}
+
+{% block content %}
+    <h1>My bookings</h1>
+
+    {% if bookings %}
+        <ul>
+            {% for booking in bookings %}
+                <li>
+                    {{ booking.room }}: {{ booking.datetime_start }} - {{ booking.datetime_end }}
+                    ({{ booking.get_status_display }})
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have no bookings yet. <a href="{% url 'make_booking' %}">Make one</a></p>
+    {% endif %}
+{% endblock %}

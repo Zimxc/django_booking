@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Booking Service{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'room_list' %}">Rooms</a> |
+        <a href="{% url 'make_booking' %}">Make booking</a> |
+        <a href="{% url 'my_bookings' %}">My bookings</a>
+        {% if user.is_authenticated %}| Logged in as {{ user.username }}{% endif %}
+    </nav>
+    <hr>
+
+    {% block content %}{% endblock %}
+</body>
+</html>

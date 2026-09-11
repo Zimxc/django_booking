@@ -1,0 +1,13 @@
+{% extends 'booking/base.html' %}
+
+{% block title %}Booking created{% endblock %}
+
+{% block content %}
+    <h1>Booking created!</h1>
+    <p>Room: {{ booking.room }}</p>
+    <p>From: {{ booking.datetime_start }}</p>
+    <p>To: {{ booking.datetime_end }}</p>
+    <p>Status: {{ booking.get_status_display }}</p>
+
+    <a href="{% url 'my_bookings' %}">See my bookings</a>
+{% endblock %}

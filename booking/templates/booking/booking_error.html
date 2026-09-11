@@ -1,0 +1,10 @@
+{% extends 'booking/base.html' %}
+
+{% block title %}Booking error{% endblock %}
+
+{% block content %}
+    <h1>Could not create booking</h1>
+    <p>{{ error }}</p>
+
+    <a href="{% url 'make_booking' %}">Try again</a>
+{% endblock %}
