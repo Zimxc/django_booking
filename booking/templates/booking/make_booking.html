@@ -3,45 +3,58 @@
 {% block title %}Make Booking{% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-lg-6">
-            <h1 class="mb-4">Make a booking</h1>
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+            <div class="mb-4">
+                <h1 class="display-6 fw-bold mb-2">Make a booking</h1>
+                <p class="text-body-secondary mb-0">Select a room and the start and end time.</p>
+            </div>
 
-            <form method="post" class="card card-body shadow-sm">
+            <form method="post" class="card border-secondary shadow-sm">
                 {% csrf_token %}
 
-                <div class="mb-3">
-                    <label class="form-label" for="username">Username</label>
-                    <input class="form-control" id="username" type="text" value="{{ request.user.username }}" readonly>
-                </div>
+                <div class="card-body p-4">
+                    <h2 class="h5 mb-3">Your details</h2>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label" for="username">Username</label>
+                            <input class="form-control" id="username" type="text" value="{{ request.user.username }}" readonly>
+                        </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="email">Email</label>
-                    <input class="form-control" id="email" type="email" value="{{ request.user.email }}" readonly>
-                </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-control" id="email" type="email" value="{{ request.user.email }}" readonly>
+                        </div>
+                    </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="room_number">Room</label>
-                    <select class="form-select" id="room_number" name="room_number" required>
-                        {% for room in rooms %}
-                            <option value="{{ room.room_number }}" {% if room.room_number == selected_room %}selected{% endif %}>
-                                {{ room }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </div>
+                    <hr class="border-secondary my-4">
+                    <h2 class="h5 mb-3">Reservation details</h2>
 
-                <div class="mb-3">
-                    <label class="form-label" for="datetime_start">Start</label>
-                    <input class="form-control" type="datetime-local" id="datetime_start" name="datetime_start" required>
-                </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="room_number">Room</label>
+                        <select class="form-select" id="room_number" name="room_number" required>
+                            {% for room in rooms %}
+                                <option value="{{ room.room_number }}" {% if room.room_number == selected_room %}selected{% endif %}>
+                                    {{ room }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="datetime_end">End</label>
-                    <input class="form-control" type="datetime-local" id="datetime_end" name="datetime_end" required>
-                </div>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label" for="datetime_start">Start</label>
+                            <input class="form-control" type="datetime-local" id="datetime_start" name="datetime_start" required>
+                        </div>
 
-                <button class="btn btn-primary" type="submit">Book room</button>
+                        <div class="col-md-6">
+                            <label class="form-label" for="datetime_end">End</label>
+                            <input class="form-control" type="datetime-local" id="datetime_end" name="datetime_end" required>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary w-100" type="submit">Confirm booking</button>
+                </div>
             </form>
         </div>
     </div>

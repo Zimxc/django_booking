@@ -3,8 +3,8 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.utils.dateparse import parse_datetime
 
-from .models import Booking, Room
 
+from .models import Booking, Room
 
 def room_list(request):
     rooms = Room.objects.all().order_by('room_number')
@@ -12,7 +12,7 @@ def room_list(request):
 
 
 @login_required
-def make_booking(request):
+def make_booking(request, ):
     rooms = Room.objects.all().order_by('room_number')
 
     if request.method == 'POST':
@@ -65,11 +65,27 @@ def make_booking(request):
 
 
 @login_required
-def my_bookings(request):
+def my_bookings(request, ):
     bookings = Booking.objects.filter(
         customer=request.user
     ).select_related('room').order_by('-datetime_start')
 
     return render(request, 'booking/my_bookings.html', {
         'bookings': bookings
+    })
+
+def change_booking_status(request, booking_id, new_status, ):
+    booking = Booking.objects.get(id=booking_id)
+
+    if new_status not in ['cancelled', 'completed', 'pending']:
+        return render(request, 'booking/booking_error.html', {
+            'error': 'Invalid status change.'
+        })
+
+    booking.status = new_status
+    booking.save()
+
+    return render(request, 'booking/booking_success.html', {
+        'booking': booking,
+        'message': f'Booking status changed to {new_status}.'
     })

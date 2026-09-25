@@ -3,10 +3,16 @@
 {% block title %}Booking error{% endblock %}
 
 {% block content %}
-    <div class="alert alert-danger">
-        <h1 class="h4 alert-heading">Could not create booking</h1>
-        <p class="mb-0">{{ error }}</p>
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card border-danger shadow-sm">
+                <div class="card-header text-bg-danger">Booking error</div>
+                <div class="card-body p-4">
+                    <h1 class="h3 card-title">Could not create booking</h1>
+                    <p class="card-text text-body-secondary mb-4">{{ error }}</p>
+                    <a class="btn btn-primary" href="{% url 'make_booking' %}">Try again</a>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <a class="btn btn-outline-primary" href="{% url 'make_booking' %}">Try again</a>
 {% endblock %}

@@ -3,15 +3,36 @@
 {% block title %}Booking created{% endblock %}
 
 {% block content %}
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <h1 class="h3 card-title">Booking created!</h1>
-            <p class="card-text mb-1"><strong>Room:</strong> {{ booking.room }}</p>
-            <p class="card-text mb-1"><strong>From:</strong> {{ booking.datetime_start }}</p>
-            <p class="card-text mb-1"><strong>To:</strong> {{ booking.datetime_end }}</p>
-            <p class="card-text"><strong>Status:</strong> {{ booking.get_status_display }}</p>
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card border-success shadow-sm">
+                <div class="card-header text-bg-success">Success</div>
+                <div class="card-body p-4">
+                    <h1 class="h3 card-title mb-3">{% if message %}Booking updated{% else %}Booking created!{% endif %}</h1>
+                    {% if message %}<p class="text-body-secondary">{{ message }}</p>{% endif %}
 
-            <a class="btn btn-primary" href="{% url 'my_bookings' %}">See my bookings</a>
+                    <dl class="row mb-4">
+                        <dt class="col-sm-3">Room</dt>
+                        <dd class="col-sm-9">{{ booking.room }}</dd>
+                        <dt class="col-sm-3">From</dt>
+                        <dd class="col-sm-9">{{ booking.datetime_start }}</dd>
+                        <dt class="col-sm-3">To</dt>
+                        <dd class="col-sm-9">{{ booking.datetime_end }}</dd>
+                        <dt class="col-sm-3">Status</dt>
+                        <dd class="col-sm-9 mb-0">
+                            <span class="badge
+                                {% if booking.status == 'confirmed' %}text-bg-success
+                                {% elif booking.status == 'cancelled' %}text-bg-danger
+                                {% else %}text-bg-warning
+                                {% endif %}">
+                                {{ booking.get_status_display }}
+                            </span>
+                        </dd>
+                    </dl>
+
+                    <a class="btn btn-primary" href="{% url 'my_bookings' %}">See my bookings</a>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

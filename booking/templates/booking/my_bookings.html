@@ -3,15 +3,21 @@
 {% block title %}My bookings{% endblock %}
 
 {% block content %}
-    <h1 class="mb-4">My bookings</h1>
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+        <div>
+            <h1 class="display-6 fw-bold mb-2">My bookings</h1>
+            <p class="text-body-secondary mb-0">Your current and previous room reservations.</p>
+        </div>
+        <a class="btn btn-primary align-self-start" href="{% url 'make_booking' %}">New booking</a>
+    </div>
 
     {% if bookings %}
-        <div class="list-group">
+        <div class="list-group shadow-sm">
             {% for booking in bookings %}
-                <div class="list-group-item d-flex justify-content-between align-items-center gap-3">
+                <div class="list-group-item list-group-item-action d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 p-4 border-secondary">
                     <div>
-                        <h2 class="h5 mb-1">{{ booking.room }}</h2>
-                        <span class="text-secondary">{{ booking.datetime_start }} — {{ booking.datetime_end }}</span>
+                        <h2 class="h5 mb-2">{{ booking.room }}</h2>
+                        <span class="text-body-secondary">{{ booking.datetime_start|date:"M d, Y · H:i" }} — {{ booking.datetime_end|date:"M d, Y · H:i" }}</span>
                     </div>
                     <span class="badge
                         {% if booking.status == 'confirmed' %}text-bg-success
@@ -25,8 +31,12 @@
             {% endfor %}
         </div>
     {% else %}
-        <div class="alert alert-secondary">
-            You have no bookings yet. <a class="alert-link" href="{% url 'make_booking' %}">Make one</a>
+        <div class="card border-secondary text-center py-5">
+            <div class="card-body">
+                <h2 class="h4">No bookings yet</h2>
+                <p class="text-body-secondary">Your reservations will appear here.</p>
+                <a class="btn btn-primary" href="{% url 'make_booking' %}">Book a room</a>
+            </div>
         </div>
     {% endif %}
 {% endblock %}
